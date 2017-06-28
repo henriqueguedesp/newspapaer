@@ -1,0 +1,40 @@
+
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% if user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <br>
+    <div class="container">
+        <form action="/setarImagem" enctype="multipart/form-data" method="post" >
+            <label for="es">Nova imagem:</label>
+            <input type="file" name="arquivo" class="btn-default"  id="es" />
+            <button type="submit" class="btn btn-success" style="margin-bottom: 20px;margin-top: 10px;">ADICIONAR IMAGEM</button>
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

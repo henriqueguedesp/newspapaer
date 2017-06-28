@@ -1,0 +1,45 @@
+@media (min-width: 150px) and (max-width:350px) {
+    #ti a{
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 351px) and (max-width:450px) {
+    #ti a{
+        font-size: 25px;
+    }
+}
+@media (min-width: 451px) and (max-width: 570px) {
+    #ti a{
+        font-size: 35px;
+    }
+}
+
+@media (min-width: 571px) and (max-width: 768px) {
+    #ti a{
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+    #ti a{
+        font-size: 50px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) { 
+    #ti a{
+        font-size: 50px;
+    }
+}
+@media (min-width: 1200px) { 
+    #ti a{
+        font-size: 40px;
+        margin-top: 5px;
+    }
+    
+    #logar {
+        margin-top: 25px;
+    }
+    
+    
+} 

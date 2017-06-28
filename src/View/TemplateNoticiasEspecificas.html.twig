@@ -1,0 +1,75 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+    <body>
+        {% if user == null %}
+            {{ include('TemplateCabecalho.html.twig') }}
+        {% elseif user.adm == 1 %}
+            {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+        {% else %}
+            {{ include('TemplateCabecalhoJornalista.html.twig') }}
+        {% endif %}
+        <br>
+    <center style="color: #191970;font-size: 45px;"><b>{{cat}}</b></center>
+
+    <div class="container">
+        {% if dados == null%}
+            {{ include('TemplateSemNoticia.html.twig') }}
+        {% endif %}
+        {%  for dado in dados %}
+            <hr>
+            <div class="row">
+                {% if dado.data != null%}
+                    <div class="col-md-4 col-md-offset-1">
+                        <a href="/noticia/{{dado.idNoticia}}">
+                            <img  class="img-responsive img-rounded" alt="{{dado.nomeCapa}}" src="data:{{dado.type}};base64, {{dado.data}}"/>
+                        </a>
+                    </div>
+                    <div class="col-md-5">
+                        <p style="color: #808080;font-size: 13px;"><b>{{dado.descricao}} | {{dado.dataPublicacao}}</b></p>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Oswald', sans-serif;color: #191970"><h3 style="font-size: 25px"><b>{{dado.titulo}}</b></h3></a>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Open Sans Condensed', sans-serif;color: #000"><h4>{{dado.resumo}}</h4></a>
+                    </div>
+                {% endif %}
+                {% if dado.data == null%}
+                    <div class="col-md-12">
+                        <p style="color: #808080;font-size: 13px;"><b>{{dado.descricao}} | {{dado.dataPublicacao}}</b></p>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Oswald', sans-serif;color: #191970"><h3 style="font-size: 25px"><b>{{dado.titulo}}</b></h3></a>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Open Sans Condensed', sans-serif;color: #000"><h4>{{dado.resumo}}</h4></a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <hr>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

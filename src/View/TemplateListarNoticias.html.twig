@@ -1,0 +1,79 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <script type="text/javascript" language="Javascript">
+        function confirmacao(id) {
+            var resposta = confirm("Deseja tirar a notícia do ar?");
+            if (resposta == true) {
+
+                window.location.assign("/deletarNoticia/" + id);
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% if user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <div class="container">
+        <br>
+        {% if dados != null%}
+            <center><h1><b>NOTÍCIAS CADASTRADAS</b></h1></center>
+                    {% endif %}
+                    {% if dados == null%}
+            <center><h1><b>Você ainda não adicionou notícias! :(</b></h1></center>
+                    {% endif %}
+                    {% for dado in dados %}
+            <div class="row">
+                <hr>
+                {% if dado.data != null%}
+                    <div class="col-md-4 col-md-offset-1">
+                        <a href="/noticia/{{dado.idNoticia}}">
+                            <img  class="img-responsive img-rounded" alt="{{dado.nomeCapa}}" src="data:{{dado.type}};base64, {{dado.data}}"/>
+                        </a>
+                    </div>
+                    <div class="col-md-7">
+
+                        <a href="editarNoticia/{{dado.idNoticia}}" class="btn btn-warning">Editar</a> <a  class="btn btn-danger" onclick="confirmacao({{dado.idNoticia}})">Deletar</a>
+                        <b><p style="font-family: 'Lato', sans-serif;font-size: 10px">POR {{dado.nome | upper}}  - EM {{dado.descricao | upper}}  - <span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{dado.dataPublicacao}}</p></b>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Oswald', sans-serif;color: #000"><h3 style="font-size: 25px"><b>{{dado.titulo}}</b></h3></a>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Open Sans Condensed', sans-serif;color: #778899"><h4><b>{{dado.resumo}}</b></h4></a>
+                    </div>
+                {% endif%}
+                {% if dado.data == null%}
+                    <div class="col-md-4 col-md-offset-1">
+                        <a href="/noticia/{{dado.idNoticia}}"><img  class="img-responsive img-rounded" alt="Sem foto de capa!" src="../imagens/sem-imagem.jpg"/></a>
+                    </div>
+                    <div class="col-md-7">
+                        <a href="editarNoticia/{{dado.idNoticia}}" class="btn btn-warning">Editar</a> <a  class="btn btn-danger" onclick="confirmacao({{dado.idNoticia}})">Deletar</a>
+                        <b><p style="font-family: 'Lato', sans-serif;font-size: 10px">POR {{dado.nome | upper}}  - EM {{dado.descricao | upper}}  - <span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{dado.dataPublicacao}}</p></b>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Oswald', sans-serif;color: #000"><h3 style="font-size: 25px"><b>{{dado.titulo}}</b></h3></a>
+                        <a href="/noticia/{{dado.idNoticia}}" style="font-size: 40px;text-decoration: none;font-family: 'Open Sans Condensed', sans-serif;color: #778899"><h4><b>{{dado.resumo}}</b></h4></a>
+                    </div>
+                {% endif%}
+            </div>
+        {% endfor %}
+        <hr>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

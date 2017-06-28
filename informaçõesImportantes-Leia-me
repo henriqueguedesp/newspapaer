@@ -1,0 +1,4 @@
+
+Assim que copiar a pasta do sistema e querer começar usar o mesmo é necessário dar um comando chmod 777 -R "nomeDaPastaDoSistema", pois o sistema utilizar comandos que precisão de permissão. Caso não seja dada esse comando algumas funções do sistema não funcionará.
+
+Caso não tenha um usuário ADMINISTRADOR cadastrado no sistema, é necessário somente chamar a rota /iniciarSistema. Que o sistema irá criar um usuário já com senha, e logo depois irá mostrar as credências para poder realizar login. Pois assim ele já cria a pasta para uploads de imagens.

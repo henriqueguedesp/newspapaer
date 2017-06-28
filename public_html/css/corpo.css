@@ -1,0 +1,50 @@
+@media (max-width: 768px) { 
+    #titulo p{
+        font-size: 35px;
+    }
+    #resumo p{
+        font-size: 20px;
+    }
+    #descricao p{
+        font-size: 6px;
+         color: #000;
+    }
+}
+@media (min-width: 769px) and (max-width: 991px) {
+    #titulo p{
+        font-size: 40px;
+    }
+    #resumo p{
+        font-size: 25px;
+    }
+    #descricao p{
+        font-size: 8px;
+         color: #000;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) { 
+    #titulo p{
+        font-size: 40px;
+    }
+    #resumo p{
+        font-size: 25px;
+    }
+    #descricao p{
+        font-size: 8px;
+         color: #000;
+    }
+}
+@media (min-width: 1200px) { 
+    #titulo p{
+        font-size: 50px;
+    }
+    #resumo p{
+        font-size: 30px;
+    }
+    #descricao p{
+        font-size: 10px;
+         color: #000;
+    }
+    
+    
+} 

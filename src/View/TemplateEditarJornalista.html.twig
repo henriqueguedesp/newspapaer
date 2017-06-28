@@ -1,0 +1,49 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+    {% if user == null %}
+        {{ include('TemplateCabecalho.html.twig') }}
+    {% elseif user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <div class="container">
+        <h2 ><center><b>EDITAR JORNALISTA</b></center></h2>
+        <form action="/salvarEdicaoJornalista/{{dados.idJornalista}}" method="POST" enctype="multipart/form-data" >
+            <br>
+            <label for="name">Tipo:</label><br>
+            <select class="btn-default" id="sele" name="tipo">
+                <option value="1" >Administrador</option>
+                <option value="0" >Jornalista</option>
+            </select><br>
+            <label for="name">Nome:</label>
+            <input name="nome" type="text" class="form-control" placeholder="Nome do jornalista..." id="name" value="{{dados.nome}}"/>
+            <label for="mail">E-mail</label>
+            <input name="email" type="text" class="form-control" placeholder="E-mail do jornalista..." id="mail" value="{{dados.email}}"/>
+            <label for="pass">Senha</label>
+            <input name="senha" type="password" class="form-control" placeholder="Senha para acesso..." id="pass" value="{{dados.senha}}"/>
+            <br>
+            <button type="submit" class="btn btn-warning" style="margin-bottom: 20px;margin-top: 10px;">ATUALIZAR JORNALISTA</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

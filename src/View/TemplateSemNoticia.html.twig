@@ -1,0 +1,26 @@
+ 
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+    <body>
+        <div class="container">
+            <center style="font-family: 'BioRhyme', serif;font-size: 30px;">
+                <img class="img-responsive img-circle" src="/imagens/semNoticia.png">
+                Sem notícia para essa categoria!
+            </center>
+        </div>
+    </body>
+{% endblock %}

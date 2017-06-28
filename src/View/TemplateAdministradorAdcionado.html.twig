@@ -1,0 +1,44 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+    {% if user == null %}
+        {{ include('TemplateCabecalho.html.twig') }}
+    {% elseif user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <div class="container">
+        <h2 ><center><b>O sistema adicionou um novo Administrador!</b></center></h2>
+        <form action="/login" >
+            <br>
+            <label for="name">Nome:</label>
+            <input name="nome" readonly="readonly" type="text" class="form-control"id="name" value="{{adm.nome}}"/>
+            <label for="mail">E-mail</label>
+            <input name="email" type="text" readonly="readonly" class="form-control" id="mail" value="{{adm.email}}"/>
+            <label for="pass">Senha</label>
+            <input name="senha" type="text" class="form-control" readonly="readonly"  id="pass" value="{{adm.senha}}"/>
+            <br>
+            <button type="submit" class="btn btn-warning" style="margin-bottom: 20px;margin-top: 10px;">IR PARA LOGIN</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

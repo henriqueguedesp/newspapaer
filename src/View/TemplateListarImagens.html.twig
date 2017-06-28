@@ -1,0 +1,45 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% if user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <br>
+    <div class="container">
+        {% if dados  == null%}
+            <center><h2>SUA GALERIA ESTÁ VAZIA!</h2></center>
+            <center><h4>Clique <a href="/novaImagem">aqui</a> para adicionar imagens a sua biblioteca!</h4></center>
+            {% else%}
+            <center><h2>SUA GALERIA</h2></center>
+                {%  for dado in dados %}
+                <div class="col-md-3">
+                    <img class="img-responsive img-thumbnail" src='{{dado}}'/>
+                    <p><b>URL:</b> /../{{dado}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

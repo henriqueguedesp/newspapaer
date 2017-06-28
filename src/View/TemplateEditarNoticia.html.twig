@@ -1,0 +1,101 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <script type="text/javascript" src='../js/tinymce.min.js'></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#myTextarea',
+            file_browser_callback: function (field_name, url, type, win) {
+                win.document.getElementById(field_name).value = 'my browser value';
+            },
+            file_browser_callback_types: 'file image media',
+            theme: 'modern',
+            height: 400,
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'save table contextmenu directionality emoticons template paste textcolor'
+            ],
+            content_css: 'css/content.css',
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons '
+
+            ,
+
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% if user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <div class="container">
+        <h2 ><center><b>EDITAR NOTÍCIA</b></center></h2>
+        <form action="/salvarEdicao/{{dados.idNoticia}}" method="POST" enctype="multipart/form-data" >
+            <br>
+            <label for="cA">Capa Atual:</label>
+            {% if imagem == null %}
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <center><h4>SEM IMAGEM DE CAPA</h4></center>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <img  class="img-responsive img-rounded" alt="{{dados.nomeCapa}}" src="data:{{dados.type}};base64, {{imagem}}"/>
+                        <br>
+                    </div>
+                    <div class="col-md-12">
+                        <label>Deseja remover a capa?</label><br>
+                        <input type="radio" name="opcao" value="nao"/> Não<br>
+                        <input type="radio" name="opcao" value="sim"/> Sim<br>
+                    </div>
+                </div>
+            {% endif%}
+            <br>
+            <label for="tit">Titulo:</label>
+            <input name="titulo" type="text" class="form-control" placeholder="Titulo da notícia..." id="tit" value="{{dados.titulo}}"/>
+            <label for="res">Resumo:</label>
+            <input name="resumo" type="text" class="form-control" placeholder="Resumo da notícia..." id="res" value="{{dados.resumo}}" />
+            <div class="col-md-6">
+                <label for="sele">Categoria:</label><br>
+                <select class="btn-warning" id="sele" name="categoria" value="{{dados.descricao}}">
+                    {%  for cat in categorias %}
+                        <option value="{{cat.idCategoria}}">{{cat.descricao}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="es">Nova Capa:</label>
+                <input type="file" name="arquivo" class="btn-warning"  id="es"/>
+            </div>
+            <div class="col-md-12">
+                <br>
+                <textarea id="myTextarea" name="texto">{{dados.texto | raw}}</textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-warning" style="margin-bottom: 20px;margin-top: 10px;">EDITAR NOTÍCIA</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

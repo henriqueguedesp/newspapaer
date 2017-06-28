@@ -1,0 +1,74 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <script type="text/javascript" src='js/tinymce.min.js'></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#myTextarea',
+
+            theme: 'modern',
+            height: 400,
+            plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'save table contextmenu directionality emoticons template paste textcolor'
+            ],
+            content_css: 'css/content.css',
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons '
+
+            ,
+
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    {% if user.adm == 1 %}
+        {{ include('TemplateCabecalhoAdministrador.html.twig') }}
+    {% else %}
+        {{ include('TemplateCabecalhoJornalista.html.twig') }}
+    {% endif %}
+    <div class="container">
+        <h2 ><center><b>NOVA NOTÍCIA</b></center></h2>
+        <form action="/cadastrarNoticia" method="POST" enctype="multipart/form-data" >
+            <br>
+            <label for="tit">Titulo:</label>
+            <input name="titulo" type="text" class="form-control" placeholder="Titulo da notícia..." id="tit" />
+            <label for="res">Resumo:</label>
+            <input name="resumo" type="text" class="form-control" placeholder="Resumo da notícia..." id="res" />
+            <div class="col-md-6">
+                <label for="sele">Categoria:</label><br>
+                <select class="btn-default" id="sele" name="categoria">
+                    {%  for dado in dados %}
+                        <option value="{{dado.idCategoria}}">{{dado.descricao}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="es">Imagem de Capa:</label>
+                <input type="file" name="arquivo" class="btn-default"  id="es" />
+            </div>
+            <div class="col-md-12">
+                <br>
+                <textarea id="myTextarea" name="texto"></textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success" style="margin-bottom: 20px;margin-top: 10px;">ADICIONAR NOTÍCIA</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid" style="background-color: #191970;color: #B0C4DE">
+        <div class="container">
+            <div class="col-md-12" style="background-color: #191970;color: #B0C4DE">
+                <br>
+                <br>
+                <center>&copy; Copyright 2011 by <a href="https://www.linkedin.com/in/henriqueguedesp/"  target="_blank"  style="text-decoration: none;color: #fff">Henrique Guedes Pereira</a>.</center>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

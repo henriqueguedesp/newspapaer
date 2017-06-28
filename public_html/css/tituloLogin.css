@@ -1,0 +1,35 @@
+@media (max-width: 768px) { 
+
+   
+     b{
+        font-size: 45px;
+        margin-left: -63px;
+    }
+}
+@media (min-width: 769px) and (max-width: 991px) {
+    b{
+        font-size: 45px;
+        margin-left: -63px;
+    }
+}
+@media (min-width: 992px) and (max-width: 970px) { 
+
+    b{
+        font-size: 45px;
+        margin-left: -83px;
+    }
+}
+@media (min-width: 1000px) { 
+
+     b{
+        font-size: 45px;
+        margin-left: -63px;
+        
+    }
+
+    #logar {
+        margin-top: 30px;
+    }
+
+
+} 

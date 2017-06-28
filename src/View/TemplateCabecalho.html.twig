@@ -1,0 +1,151 @@
+{% extends "TemplateBase.html.twig" %}
+
+{% block title %}{% endblock %}
+{% block head %}
+{{ parent() }}
+<script src="/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<body style="background: #fff ">
+    <div class="container-fluid" style="background:#191970	">
+        <div class="container">
+            <nav class="navbar navbar-default" style="background-color: #191970;border-color:#191970 ">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="background-color: #191970;border-color:#fff;">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar" style="background-color: #fff"></span>
+                            <span class="icon-bar" style="background-color: #fff"></span>
+                            <span class="icon-bar" style="background-color: #fff"></span>
+                        </button>
+                        <div id="ti">
+                            <a class="navbar-brand" href="/" style="color: #fff;font-family: 'Orbitron', sans-serif;
+                               "><b>NEWSPAPER</b></a>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-10">
+
+
+                        <div id="logar">
+                            <a href="#personalize" style="text-decoration: none">
+
+                                <button type="button" class="btn btn-success btn-xs" aria-label="Alinhar na esquerda" 
+                                        style="background-color: #191970;border-color: #191970;color: #fff;
+                                        font-family: 'Patua One', cursive;
+                                        "  data-toggle="modal" data-target="#myModal">
+                                    <span class="glyphicon glyphicon-check" aria-hidden="true" ></span> PERSONALIZE
+                                </button>
+
+                            </a>
+                            <a href="/login" style="text-decoration: none">
+
+                                <button type="button" class="btn btn-success btn-xs" aria-label="Alinhar na esquerda" 
+                                        style="background-color: #191970;border-color: #191970;color: #fff;
+                                        font-family: 'Patua One', cursive;
+                                        ">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true" ></span> LOGIN
+                                </button>
+
+                            </a>
+                        </div>
+                    </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container" style="background:#fff">
+        <div class="container">
+            <nav class="navbar navbar-default" style="background-color: #fff;border-color: #fff">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav center-block" style="font-family: 'Montserrat', sans-serif;font-size: 13px ">
+                            <li><a href="/ciencia" style="color: #191970">CIÊNCIA</a></li>
+                            <li><a href="/desastresEAcidentes" style="color: #191970">DESASTRES E ACIDENTES</a></li>
+                            <li><a href="/economia" style="color: #191970">ECONOMIA</a></li>
+                            <li><a href="/educacao" style="color: #191970">EDUCAÇÃO</a></li>
+                            <li><a href="/esporte" style="color: #191970">ESPORTE</a></li>
+                            <li><a href="/negocio" style="color: #191970">NEGÓCIO</a></li>
+                            <li><a href="/politica" style="color: #191970">POLÍTICA</a></li>
+                            <li><a href="/saude" style="color: #191970">SAÚDE</a></li>
+                            <li><a href="/tecnologia" style="color: #191970">TECNOLOGIA</a></li>
+                            <li><a href="/transporte" style="color: #191970">TRANSPORTE</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container-fluid" style="background:#191970	">
+        <div class="col-md-12" style="height: 15px"></div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                {% if filtros == null %}
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Selecione as categorias de seu interesse:</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/filtrar" method="POST">
+                        <input type="checkbox" name="CIÊNCIA" value="CIÊNCIA"> CIÊNCIA<br>
+                        <input type="checkbox" name="DESASTRES E ACIDENTES" value="DESASTRES E ACIDENTES" > DESASTRES E ACIDENTES<br>
+                        <input type="checkbox" name="ECONOMIA" value="ECONOMIA" > ECONOMIA<br>
+                        <input type="checkbox" name="EDUCAÇÃO" value="EDUCAÇÃO" > EDUCAÇÃO<br>
+                        <input type="checkbox" name="ESPORTE" value="ESPORTE" > ESPORTE<br>
+                        <input type="checkbox" name="NEGÓCIO" value="NEGÓCIO" > NEGÓCIO<br>
+                        <input type="checkbox" name="POLÍTICA" value="POLÍTICA" > POLÍTICA<br>
+                        <input type="checkbox" name="SAÚDE" value="SAÚDE" > SAÚDE<br>
+                        <input type="checkbox" name="TECNOLOGIA" value="TECNOLOGIA" > TECNOLOGIA<br>
+                        <input type="checkbox" name="TRANSPORTE" value="TRANSPORTE" > TRANSPORTE<br><br>
+                        <a href="/filtrar">
+                            <button type="submit" class="btn btn-success" >Filtrar</button>
+                        </a>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+
+                    </a>
+                </div>
+                {% else %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Categorias selecionadas:</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/filtrar" method="POST">
+                        {% for fil in filtros %}
+                        <span class="glyphicon glyphicon-check" aria-hidden="true" ></span> {{fil}}
+                        <br>
+
+                        {% endfor %}
+                        <br>
+                        <a href="/limparFiltros">
+                            <button type="button" class="btn btn-warning" >Limpar Filtros</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+
+                    </a>
+                </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div> 
+</body>
+{% endblock %}

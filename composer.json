@@ -1,0 +1,16 @@
+{
+    "name": "Newspaper",
+    "description" : "Projeto de PPI 2",
+    "require" : {
+        "php" : ">=7.0.0",
+        "filp/whoops": "^2.1",
+        "twig/twig": "^2.3",
+        "symfony/http-foundation": "^3.3",
+        "symfony/routing": "^3.3"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Newspaper\\" : "src/"
+        }
+    }
+}
