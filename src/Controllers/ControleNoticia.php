@@ -4,6 +4,7 @@ namespace Newspaper\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 use Newspaper\Models\ModeloNoticia;
+use Newspaper\Models\ModeloCategoria;
 use Newspaper\Entity\Noticia;
 use Newspaper\Util\Sessao;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -116,6 +117,8 @@ class ControleNoticia {
 
     public function noticias() {
         $modelo = new ModeloNoticia;
+        $modeloCategorias = new ModeloCategoria();
+        $dadosCatgeorias= $modeloCategorias->categorias();
         $usuario = $this->sessao->get('usuario');
         $cookie = new Cookie();
         if ($cookie->getCookie('categorias')) {
@@ -126,7 +129,7 @@ class ControleNoticia {
                 foreach ($news as $key => $da) {
                     $dados[$key]->data = base64_encode(($news[$key]->data));
                 }
-                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario)));
+                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario,'categorias' => $dadosCatgeorias)));
             } else {
                $valores = explode(',', $cookie->getCookie('categorias'));
                 $modelo = new ModeloNoticia();
@@ -143,7 +146,7 @@ class ControleNoticia {
                 foreach ($news as $key => $da) {
                     $dados[$key]->data = base64_encode(($news[$key]->data));
                 }
-                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario, 'filtros' => $valores)));
+                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario, 'filtros' => $valores,'categorias' => $dadosCatgeorias)));
             
                
                 }
@@ -155,9 +158,9 @@ class ControleNoticia {
                 $dados[$key]->data = base64_encode(($news[$key]->data));
             }
             if ($usuario) {
-                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario)));
+                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario,'categorias' => $dadosCatgeorias)));
             } else {
-                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario, 'filtros' => null)));
+                return $this->response->setContent($this->twig->render('TemplateNoticias.html.twig', array('dados' => $dados, 'user' => $usuario, 'filtros' => null,'categorias' => $dadosCatgeorias)));
                          return $this->response->setContent($this->twig->render('TemplateCabecalhoAdm.html.twig', array('user' => $usuario)));
 
                 }
